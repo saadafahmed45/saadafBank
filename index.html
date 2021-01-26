@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saadaf Bank</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+
+    <div id="login-area">
+        <h1 class=" Welcome text-center">Welcome To Saadaf Bank</h1>
+        <div class="submit-area">
+            <h4>Loging</h4>
+            <input type="text" name="" class="form-control" placeholder="Email">
+            <br>
+            <input type="password" name="" class="form-control" placeholder="Password">
+            <br>
+            <button id="loging" class="btn btn-success">Loging</button>
+        </div>
+    </div>
+
+
+    <div id="transaction-area">
+        <div class="row">
+            <div class="col-md-4 stutas ">
+                <div class="Deposit">
+                    <h5> Deposit</h5>
+                    <h2>$<span id="currentDeposit" >00 </span> </h2>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="withrow stutas">
+                    <h5>Withdraw</h5>
+                    <h2>$<span id="currentWithrow" >00 </span></h2>
+                </div>
+               
+            </div>
+            <div class="col-md-4 ">
+                <div class="balance stutas">
+                <h5>Balance</h5>
+                <h2>$<span id="currentBalance" >1240 </span></h2>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-md-6 ">
+                <div class="submit-area">
+                    <h4>Deposit</h4>
+                <input id="depositAmount" type="text" class="form-control" placeholder="$ amount You Want to Deposit">
+                <br>
+                <button id="addDeposit"  class="btn btn-success">Deposit</button>
+                </div>
+            </div>
+            
+
+
+            <div class="col-md-6">
+               <div class="submit-area">
+                <h4>Withrow</h4>
+                <input type="text" id="withrowAmount" class="form-control"  placeholder="$ Amount You Want to Withrow ">
+                <br>
+                <button id="addWithrow"  class="btn btn-success">Withrow</button>
+               </div>
+            </div>
+
+
+        </div>
+    </div>
+    
+</body>
+
+<Script>
+    // login button even hendler srat
+const loginBtn = document.getElementById("loging");
+loginBtn.addEventListener("click",function(){
+    const loginArea =document.getElementById("login-area") 
+    loginArea.style.display = "none";
+    const transactonArea =document.getElementById("transaction-area") 
+    transactonArea.style.display = "block";
+})
+    // login button even hendler END
+
+    // depositAmount checker start 
+const depositBtn = document.getElementById("addDeposit");
+
+depositBtn.addEventListener("click", function() {
+    const depositNumber = getInputNumber("depositAmount");
+
+   
+    updateSpanTex("currentDeposit",depositNumber);
+    updateSpanTex("currentBalance",depositNumber);
+
+
+    document.getElementById("depositAmount").value="";
+})
+      // withdrow
+
+ const withrowBtn = document.getElementById("addWithrow");
+    withrowBtn.addEventListener("click",function (){
+
+ const withrowNumber = getInputNumber("withrowAmount");
+ updateSpanTex("currentWithrow",withrowNumber);
+ updateSpanTex("currentBalance", -1*withrowNumber);
+
+
+ document.getElementById("withrowAmount").value="";
+
+})
+
+function getInputNumber(id){
+     const Amount = document.getElementById(id).value;
+     const amountNumber = parseFloat(Amount);
+     return amountNumber;
+}
+
+function updateSpanTex(id,depositNumber){
+    const current = document.getElementById(id).innerText;
+    const currentNumber = parseFloat(current);
+    const totalAmount = depositNumber + currentNumber;
+    document.getElementById(id).innerText=totalAmount; 
+}
+    // depositAmount checker END 
+
+
+</Script>
+</html>
